@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://qadv66abssyo"]
+
+[ext_resource type="Script" uid="uid://cr3qhnyg2s004" path="res://main_menu.gd" id="1_06t4h"]
+
+[node name="MainMenu" type="Control" unique_id=1772370674]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_06t4h")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=441747034]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(29.245026, 17.920528)
+color = Color(0.5963672, 0.59636724, 0.59636724, 1)
+
+[node name="Label" type="Label" parent="." unique_id=1666662412]
+layout_mode = 0
+offset_left = 494.0
+offset_top = 41.0
+offset_right = 565.0
+offset_bottom = 64.0
+scale = Vector2(1.92, 2.2768996)
+text = "Full Fight"
+
+[node name="Button" type="Button" parent="." unique_id=1985467235]
+layout_mode = 0
+offset_left = 539.0
+offset_top = 118.0
+offset_right = 586.0
+offset_bottom = 149.0
+scale = Vector2(1.36, 1.2237091)
+text = "PLAY"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
