@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 const SPEED = 150.0
+var health = 50
 
 var player: CharacterBody2D
 
@@ -15,3 +16,11 @@ func _physics_process(delta):
 	velocity = direction * SPEED
 
 	move_and_slide()
+	
+func take_damage(amount: int):
+	health -= amount
+	print("Enemy HP:", health)
+
+	if health <= 0:
+		print("Enemy defeated!")
+		queue_free()
