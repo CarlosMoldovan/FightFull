@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cnoqre1nlxevr"]
+
+[ext_resource type="PackedScene" uid="uid://c4c52ypms5j8r" path="res://enemy.tscn" id="1_nuh3y"]
+[ext_resource type="Texture2D" uid="uid://dk6l7kf0gibcl" path="res://SpritesImages/cow/Idle&Walk/walk1.png" id="2_m1w7b"]
+[ext_resource type="Texture2D" uid="uid://behuaio1u8sqw" path="res://SpritesImages/cow/Idle&Walk/walk2.png" id="3_y5k1g"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7k104"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("2_m1w7b")
+}, {
+"duration": 1.5,
+"texture": ExtResource("3_y5k1g")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="enemy" unique_id=1150459999 instance=ExtResource("1_nuh3y")]
+
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=1107778407]
+scale = Vector2(0.33784676, 0.23016231)
+sprite_frames = SubResource("SpriteFrames_7k104")
+animation = &"idle"
