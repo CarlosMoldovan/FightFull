@@ -2,10 +2,33 @@
 
 [ext_resource type="PackedScene" uid="uid://c4c52ypms5j8r" path="res://enemy.tscn" id="1_nuh3y"]
 [ext_resource type="Texture2D" uid="uid://dk6l7kf0gibcl" path="res://SpritesImages/cow/Idle&Walk/walk1.png" id="2_m1w7b"]
+[ext_resource type="Script" uid="uid://b765viyqg1hge" path="res://cow.gd" id="2_uaxjc"]
+[ext_resource type="Texture2D" uid="uid://b8udygc4qekwx" path="res://SpritesImages/cow/Attack/Attack2.png" id="3_uaxjc"]
 [ext_resource type="Texture2D" uid="uid://behuaio1u8sqw" path="res://SpritesImages/cow/Idle&Walk/walk2.png" id="3_y5k1g"]
+[ext_resource type="Texture2D" uid="uid://cn0shb68vpuho" path="res://SpritesImages/cow/Attack/Attack4.png" id="4_isgm3"]
+[ext_resource type="Texture2D" uid="uid://jvmpjrhre6xe" path="res://SpritesImages/cow/Idle&Walk/walk3.png" id="6_jbpbs"]
+[ext_resource type="Texture2D" uid="uid://bttii13pal5wr" path="res://SpritesImages/cow/Attack/Attack3.png" id="6_tc63g"]
+[ext_resource type="Texture2D" uid="uid://midv82r3ykhq" path="res://SpritesImages/cow/Idle&Walk/walk4.png" id="7_isgm3"]
+[ext_resource type="AudioStream" uid="uid://cvpwvhjxk42e6" path="res://Sounds/muuu.mp3" id="7_jhu8x"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7k104"]
 animations = [{
+"frames": [{
+"duration": 1.5,
+"texture": ExtResource("3_uaxjc")
+}],
+"loop": 1,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.5,
+"texture": ExtResource("4_isgm3")
+}],
+"loop": 1,
+"name": &"attack_reverse",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 2.0,
 "texture": ExtResource("2_m1w7b")
@@ -14,13 +37,51 @@ animations = [{
 "texture": ExtResource("3_y5k1g")
 }],
 "loop": 1,
-"name": &"idle",
+"name": &"walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("6_jbpbs")
+}, {
+"duration": 1.5,
+"texture": ExtResource("7_isgm3")
+}],
+"loop": 1,
+"name": &"walk_reverse",
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k665r"]
+size = Vector2(114.12428, 89.28532)
+
 [node name="enemy" unique_id=1150459999 instance=ExtResource("1_nuh3y")]
+script = ExtResource("2_uaxjc")
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=1107778407]
-scale = Vector2(0.33784676, 0.23016231)
+position = Vector2(-8, 4.9999995)
+scale = Vector2(0.2371262, 0.22039722)
 sprite_frames = SubResource("SpriteFrames_7k104")
-animation = &"idle"
+animation = &"walk"
+
+[node name="MooSound" type="AudioStreamPlayer2D" parent="." index="2" unique_id=1857454714]
+stream = ExtResource("7_jhu8x")
+
+[node name="AttackDirection" type="Node2D" parent="." index="3" unique_id=2077269759]
+
+[node name="Milk" type="Sprite2D" parent="AttackDirection" index="0" unique_id=1684703783]
+visible = false
+position = Vector2(47.185, 22)
+scale = Vector2(0.09949177, 0.040721435)
+texture = ExtResource("6_tc63g")
+
+[node name="MilkHitbox" type="Area2D" parent="AttackDirection" index="1" unique_id=1318122328]
+position = Vector2(0, 3)
+scale = Vector2(0.99508566, 0.9269008)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackDirection/MilkHitbox" index="0" unique_id=87022881]
+position = Vector2(49.40419, 17.26183)
+scale = Vector2(1.0890584, -0.43442008)
+shape = SubResource("RectangleShape2D_k665r")
+
+[connection signal="body_entered" from="AttackDirection/MilkHitbox" to="." method="_on_milk_hitbox_body_entered"]

@@ -2,8 +2,13 @@ extends CharacterBody2D
 
 const SPEED = 150.0
 
+const ATTACK_RANGE = 150.0
+const ATTACK_DAMAGE = 10
+const ATTACK_COOLDOWN = 1.5
+
 var health = 50
 var is_dead = false
+var can_attack = true
 
 var player: CharacterBody2D
 var black_hole: Marker2D
@@ -12,7 +17,7 @@ var black_hole: Marker2D
 var orbit_angle = 0.0
 var orbit_radius = 0.0
 var orbit_turns = 0.0
-var orbit_speed = 6.0          # radiani/sec
+var orbit_speed = 6.0
 var pulling = false
 var suction_speed = 0.0
 
@@ -29,11 +34,9 @@ func _physics_process(delta):
 
 		if !pulling:
 
-			# orbitare
 			orbit_angle += orbit_speed * delta
 			orbit_turns += orbit_speed * delta
 
-			# spirala devine din ce in ce mai mica
 			orbit_radius = max(orbit_radius - 45 * delta, 18)
 
 			global_position = black_hole.global_position + Vector2(
@@ -47,14 +50,12 @@ func _physics_process(delta):
 
 			modulate.a = lerp(modulate.a, 0.4, 1.5 * delta)
 
-			# 3 rotatii complete
 			if orbit_turns >= PI * 6:
 				pulling = true
 				suction_speed = 700
 
 		else:
 
-			# aspirare finala foarte rapida
 			suction_speed += 1800 * delta
 
 			global_position = global_position.move_toward(
@@ -73,15 +74,40 @@ func _physics_process(delta):
 
 		return
 
-
 	if player == null:
 		return
+
+	var distance = global_position.distance_to(player.global_position)
+
+	if distance > ATTACK_RANGE:
+
+		move_towards_player()
+
+	else:
+
+		velocity = Vector2.ZERO
+
+		if can_attack:
+			attack()
+
+
+func move_towards_player():
 
 	var direction = (player.global_position - global_position).normalized()
 
 	velocity = direction * SPEED
 
 	move_and_slide()
+
+func attack():
+
+	can_attack = false
+
+	print("Generic attack")
+
+	await get_tree().create_timer(ATTACK_COOLDOWN).timeout
+
+	can_attack = true
 
 
 func take_damage(amount):

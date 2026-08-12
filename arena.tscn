@@ -27,7 +27,7 @@ texture = ExtResource("1_27ga2")
 scale = Vector2(-2.508824, -1.5526372)
 
 [node name="TopWall" type="CollisionShape2D" parent="Walls" unique_id=902195279]
-position = Vector2(-6.377495, 1.2881165)
+position = Vector2(-6.3774896, 28.982948)
 scale = Vector2(1, 2.615671)
 shape = SubResource("RectangleShape2D_k665r")
 
@@ -54,4 +54,5 @@ scale = Vector2(0.83327025, 0.7665917)
 script = ExtResource("4_h0wof")
 
 [node name="EnemySpawn" type="Marker2D" parent="." unique_id=1115542395]
-position = Vector2(-223, 183)
+position = Vector2(-298, 226.00002)
+scale = Vector2(2.6599026, 9.878873)
