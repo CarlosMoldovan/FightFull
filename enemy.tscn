@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c4c52ypms5j8r"]
+
+[ext_resource type="Script" uid="uid://6qwo6dxgpw5q" path="res://enemy.gd" id="1_4gyqm"]
+[ext_resource type="AudioStream" uid="uid://c50lt4d5yi6lv" path="res://Sounds/black-hole.mp3" id="2_4gyqm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k665r"]
+size = Vector2(122, 121)
+
+[node name="enemy" type="CharacterBody2D" unique_id=1150459999 groups=["enemy"]]
+script = ExtResource("1_4gyqm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1107778407]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2030213173]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_k665r")
+
+[node name="BlackHoleSound" type="AudioStreamPlayer2D" parent="." unique_id=59997005]
+stream = ExtResource("2_4gyqm")
+volume_db = 24.0

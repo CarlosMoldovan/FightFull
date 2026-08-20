@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://bg8nf0qpgksh0"]
+
+[ext_resource type="Texture2D" uid="uid://cvvpnw6xkkhmx" path="res://BackgroundArenaFinal.png" id="1_27ga2"]
+[ext_resource type="PackedScene" uid="uid://dx65l82dvqj2v" path="res://player.tscn" id="1_ubfh8"]
+[ext_resource type="Script" uid="uid://bjovpthx0ts3g" path="res://level_manager.gd" id="4_h0wof"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k665r"]
+size = Vector2(788.0186, 25.057915)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nac40"]
+size = Vector2(756.52966, 41.89821)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d1mjv"]
+size = Vector2(20, 1000)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n3aeq"]
+size = Vector2(20, 1000)
+
+[node name="arena" type="Node2D" unique_id=63209503]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1203642817]
+position = Vector2(5, 71)
+scale = Vector2(1.2444383, 0.9536506)
+texture = ExtResource("1_27ga2")
+
+[node name="Walls" type="StaticBody2D" parent="." unique_id=1781715089]
+scale = Vector2(-2.508824, -1.5526372)
+
+[node name="TopWall" type="CollisionShape2D" parent="Walls" unique_id=902195279]
+position = Vector2(-6.3774896, 28.982948)
+scale = Vector2(1, 2.615671)
+shape = SubResource("RectangleShape2D_k665r")
+
+[node name="BottomWall" type="CollisionShape2D" parent="Walls" unique_id=1453747211]
+position = Vector2(-17.538097, -188.71118)
+shape = SubResource("RectangleShape2D_nac40")
+
+[node name="LeftWall" type="CollisionShape2D" parent="Walls" unique_id=1126053415]
+position = Vector2(208.4642, -37.999863)
+shape = SubResource("RectangleShape2D_d1mjv")
+
+[node name="RightWall" type="CollisionShape2D" parent="Walls" unique_id=655153355]
+position = Vector2(-215.63887, 61.830284)
+shape = SubResource("RectangleShape2D_n3aeq")
+
+[node name="BlackHoleTarget" type="Marker2D" parent="." unique_id=1593401442 groups=["black_hole"]]
+position = Vector2(-15, -13)
+
+[node name="player" parent="." unique_id=415843363 groups=["player"] instance=ExtResource("1_ubfh8")]
+position = Vector2(179, 184)
+scale = Vector2(0.83327025, 0.7665917)
+
+[node name="LevelManager" type="Node" parent="." unique_id=865271396]
+script = ExtResource("4_h0wof")
+
+[node name="EnemySpawn" type="Marker2D" parent="." unique_id=1115542395]
+position = Vector2(-298, 226.00002)
+scale = Vector2(2.6599026, 9.878873)
