@@ -1,16 +1,45 @@
 [gd_scene format=3 uid="uid://dx65l82dvqj2v"]
 
-[ext_resource type="Texture2D" uid="uid://ddboee3j6b8ma" path="res://icon.svg" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://ctotscl0uy4c0" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://dkkcg8nusiw74" path="res://SpritesImages/Player/Walk/Player2.png" id="2_i3pqv"]
+[ext_resource type="Texture2D" uid="uid://dw3a5dw8wcity" path="res://SpritesImages/Player/Walk/Player1.png" id="3_hqtel"]
+[ext_resource type="AudioStream" uid="uid://c50lt4d5yi6lv" path="res://Sounds/black-hole.mp3" id="4_hqtel"]
+[ext_resource type="Texture2D" uid="uid://b4ac2lp3npmx3" path="res://SpritesImages/Player/Attack/attackR.png" id="5_sweqy"]
+[ext_resource type="AudioStream" uid="uid://cdco22gk4uvsl" path="res://Sounds/laser.mp3" id="6_2hs0m"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k665r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_i3pqv")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_hqtel")
+}],
+"loop": 1,
+"name": &"walk_reverse",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k665r"]
 size = Vector2(118, 120)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2hs0m"]
+size = Vector2(5.2138653, 16.043125)
+
 [node name="player" type="CharacterBody2D" unique_id=415843363]
 script = ExtResource("1_onrkg")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1094105837]
-texture = ExtResource("1_4flbx")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1669469976]
+position = Vector2(-9, 0)
+scale = Vector2(0.15211986, 0.121074945)
+sprite_frames = SubResource("SpriteFrames_k665r")
+animation = &"walk_reverse"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=812660798]
 position = Vector2(-1, 0)
@@ -18,3 +47,27 @@ shape = SubResource("RectangleShape2D_k665r")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=189524674 groups=["player"]]
 zoom = Vector2(1.1, 1.1)
+
+[node name="BlackHoleSound" type="AudioStreamPlayer" parent="." unique_id=1983574176]
+stream = ExtResource("4_hqtel")
+
+[node name="AttackDirection" type="Node2D" parent="." unique_id=176303979]
+
+[node name="Laser" type="Sprite2D" parent="AttackDirection" unique_id=695119383]
+visible = false
+position = Vector2(91, -32)
+scale = Vector2(0.09007476, 0.1352755)
+texture = ExtResource("5_sweqy")
+
+[node name="LaserHitbox" type="Area2D" parent="AttackDirection" unique_id=938211800]
+scale = Vector2(1.1200006, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackDirection/LaserHitbox" unique_id=1486137664]
+position = Vector2(83.03567, -31.5)
+scale = Vector2(30.481897, -2.9296038)
+shape = SubResource("RectangleShape2D_2hs0m")
+
+[node name="LaserSound" type="AudioStreamPlayer" parent="." unique_id=1109724511]
+stream = ExtResource("6_2hs0m")
+
+[connection signal="body_entered" from="AttackDirection/LaserHitbox" to="." method="_on_laser_hitbox_body_entered"]
