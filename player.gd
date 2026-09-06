@@ -18,12 +18,16 @@ var health = 50
 @onready var laser = $AttackDirection/Laser
 var laser_right_texture = preload("res://SpritesImages/Player/Attack/attackR.png")
 @onready var laser_sound = $LaserSound
+@onready var laser_hitbox = $AttackDirection/LaserHitbox
 
 var is_dying = false
 var death_timer = 0.0
 
 const DEATH_DURATION = 5.0
 const MAX_SHAKE = 8.0
+
+func _ready():
+	laser_hitbox.monitoring = false
  
  
 func _physics_process(delta: float):
@@ -204,10 +208,12 @@ func shoot_laser():
 	laser_sound.play()
 
 	laser.visible = true
+	laser_hitbox.monitoring = true
 
 	await get_tree().create_timer(0.15).timeout
 
 	laser.visible = false
+	laser_hitbox.monitoring = false
 
 
 func _on_laser_hitbox_body_entered(body):

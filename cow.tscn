@@ -75,19 +75,20 @@ animations = [{
 size = Vector2(114.12428, 89.28532)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nac40"]
-size = Vector2(105, 9.5)
+size = Vector2(39, 9)
 
 [node name="enemy" unique_id=1150459999 instance=ExtResource("1_nuh3y")]
 script = ExtResource("2_uaxjc")
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=1107778407]
 position = Vector2(-4, 1)
-scale = Vector2(0.16032422, 0.14168397)
+scale = Vector2(0.1511724, 0.15407537)
 sprite_frames = SubResource("SpriteFrames_7k104")
-animation = &"attack"
+animation = &"walk"
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=2030213173]
-scale = Vector2(0.85834515, 0.79651177)
+position = Vector2(-6, -2)
+scale = Vector2(0.6365659, 0.7289064)
 
 [node name="MooSound" type="AudioStreamPlayer2D" parent="." index="2" unique_id=1857454714]
 stream = ExtResource("7_jhu8x")
@@ -112,7 +113,7 @@ shape = SubResource("RectangleShape2D_k665r")
 [node name="StompDetector" type="Area2D" parent="." index="4" unique_id=1750260215]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StompDetector" index="0" unique_id=1970185792]
-position = Vector2(7, -51)
+position = Vector2(-3, -43)
 shape = SubResource("RectangleShape2D_nac40")
 
 [node name="KickSound" type="AudioStreamPlayer2D" parent="." index="5" unique_id=982461228]

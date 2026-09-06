@@ -5,6 +5,7 @@ extends "res://enemy.gd"
 @onready var milk_hitbox = $AttackDirection/MilkHitbox
 @onready var stomp_detector = $StompDetector
 @onready var kick_sound = $KickSound
+@onready var collision_shape = $CollisionShape2D
 var facing_left = false
 var is_kicking = false
 
@@ -14,6 +15,14 @@ var player_on_top_time = 0.0
 const MAX_STOMP_TIME = 1.2
 const THROW_FORCE_X = 3500.0
 const THROW_FORCE_Y = -350.0
+
+func update_collision():
+	if $AnimatedSprite2D.animation == "attack" or $AnimatedSprite2D.animation == "attack_reverse":
+		collision_shape.position.y = 10
+		collision_shape.scale = Vector2(0.9, 0.85)
+	else:
+		collision_shape.position.y = 0
+		collision_shape.scale = Vector2(1, 1)
 
 func _ready():
 
@@ -139,6 +148,7 @@ func _on_milk_hitbox_body_entered(body):
 func _physics_process(delta):
 
 	super._physics_process(delta)
+	update_collision()
 
 	if player_on_top and not is_kicking:
 

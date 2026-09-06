@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://b3h1uv0i730w4"]
+
+[ext_resource type="Texture2D" uid="uid://cbw1kt5uqi0af" path="res://SpritesImages/chicken/egg.png" id="1_6upkn"]
+[ext_resource type="Script" uid="uid://bo0hk3u132u1t" path="res://egg.gd" id="1_60cwx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w3ai0"]
+height = 22.0
+
+[node name="Node2D" type="Area2D" unique_id=224845660]
+script = ExtResource("1_60cwx")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1664108151]
+scale = Vector2(0.034098376, 0.03759111)
+texture = ExtResource("1_6upkn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1504196638]
+shape = SubResource("CapsuleShape2D_w3ai0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

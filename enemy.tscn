@@ -10,6 +10,7 @@ size = Vector2(122, 121)
 script = ExtResource("1_4gyqm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1107778407]
+position = Vector2(-1, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2030213173]
 position = Vector2(0, 0.5)
