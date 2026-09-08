@@ -25,7 +25,7 @@ var suction_speed = 0.0
 
 func _ready():
 	player = get_tree().get_first_node_in_group("player")
-	$AnimatedSprite2D.play("idle")
+	$AnimatedSprite2D.play("walk")
 	black_hole = get_tree().get_first_node_in_group("black_hole")
 
 
