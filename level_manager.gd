@@ -4,14 +4,16 @@ var current_level = 1
 var level_finished = false
 
 var levels = {
-	1: ["Raw"],
-	2: ["Chicken"],
-	3: ["Cow"]
+	1: ["Frog"],
+	2: ["Raw"],
+	3: ["Chicken"],
+	4: ["Cow"]
 }
 
 const COW_SCENE = preload("res://cow.tscn")
 const CHICKEN_SCENE = preload("res://chicken.tscn")
 const RAW_SCENE = preload("res://raw.tscn")
+const FROG_SCENE = preload("res://frog.tscn")
 
 
 func _ready():
@@ -65,6 +67,14 @@ func spawn_enemy(enemy_name: String):
 		ram.global_position = spawn.global_position
 
 		get_parent().call_deferred("add_child", ram)
+	
+	elif enemy_name == "Frog":
+		var frog = FROG_SCENE.instantiate()
+		var spawn = get_parent().get_node("EnemySpawn")
+		frog.global_position = spawn.global_position
+		get_parent().call_deferred("add_child", frog)
+		
+		
 
 
 func level_complete():
