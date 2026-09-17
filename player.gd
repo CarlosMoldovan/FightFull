@@ -7,7 +7,7 @@ const JUMP_VELOCITY = -500.0
 const ATTACK_RANGE = 140.0 
 const ATTACK_DAMAGE = 10 
  
-var health = 50 
+var health = 100 
  
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var camera = $Camera2D

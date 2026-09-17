@@ -25,6 +25,14 @@ const TONGUE_COOLDOWN = 1.5
 var player_under_frog = false
 var is_top_attacking = false
 
+var player_on_top = false
+var player_on_top_time = 0.0
+var is_kicking = false
+
+const MAX_STOMP_TIME = 1.2
+const THROW_FORCE_X = 3500.0
+const THROW_FORCE_Y = -350.0
+
 const TOP_ATTACK_DAMAGE = 10
 const TOP_ATTACK_FORCE_Y = -800.0
 const TOP_ATTACK_DURATION = 0.3
@@ -149,6 +157,34 @@ func _physics_process(delta):
 	if player == null:
 		return
 
+	# PLAYER ESTE DEASUPRA BROAȘTEI
+	if player_on_top and not is_kicking and not is_top_attacking:
+
+		player_on_top_time += delta
+
+		if player_on_top_time >= MAX_STOMP_TIME:
+
+			is_kicking = true
+
+			$KickSound.play()
+
+			var throw_direction = 1
+
+			if player.global_position.x < global_position.x:
+				throw_direction = -1
+
+			player.velocity.x = THROW_FORCE_X * throw_direction
+			player.velocity.y = THROW_FORCE_Y
+
+			print("FROG THREW PLAYER")
+
+			player_on_top = false
+			player_on_top_time = 0.0
+
+			await get_tree().create_timer(1.0).timeout
+
+			is_kicking = false
+
 	# BROASCA ESTE ÎN AER
 	if is_jumping:
 
@@ -159,6 +195,7 @@ func _physics_process(delta):
 		var hit_player = false
 
 		for i in get_slide_collision_count():
+
 			var collision = get_slide_collision(i)
 			var body = collision.get_collider()
 			var normal = collision.get_normal()
@@ -205,6 +242,7 @@ func _physics_process(delta):
 		jump_wait_timer -= delta
 
 		if jump_wait_timer <= 0:
+
 			jump_waiting = false
 
 			# Dacă playerul este sub broască, face top attack
@@ -308,13 +346,23 @@ func top_attack():
 	is_top_attacking = false
 func _ready():
 	super._ready()
+
 	$Tongue.visible = false
+
 	$TopAttackDetector.body_entered.connect(
 		_on_top_attack_detector_body_entered
 	)
 
 	$TopAttackDetector.body_exited.connect(
 		_on_top_attack_detector_body_exited
+	)
+
+	$StompDetector.body_entered.connect(
+		_on_stomp_detector_body_entered
+	)
+
+	$StompDetector.body_exited.connect(
+		_on_stomp_detector_body_exited
 	)
 
 
@@ -332,4 +380,19 @@ func _on_top_attack_detector_body_entered(body):
 func _on_top_attack_detector_body_exited(body):
 	if body.is_in_group("player"):
 		player_under_frog = false
+		print("PLAYER LEFT FROG")
+		
+func _on_stomp_detector_body_entered(body):
+	if body.is_in_group("player"):
+		player_on_top = true
+		player_on_top_time = 0.0
+
+		print("PLAYER ON TOP OF FROG")
+
+
+func _on_stomp_detector_body_exited(body):
+	if body.is_in_group("player"):
+		player_on_top = false
+		player_on_top_time = 0.0
+
 		print("PLAYER LEFT FROG")

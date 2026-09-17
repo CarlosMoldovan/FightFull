@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bsqi2iaqjvptt" path="res://SpritesImages/frog/2.png" id="3_byod8"]
 [ext_resource type="AudioStream" uid="uid://dpa77umcjr5e2" path="res://Sounds/frog.mp3" id="5_j38ec"]
 [ext_resource type="Texture2D" uid="uid://dryeqekyi3g6t" path="res://SpritesImages/frog/tongue.png" id="6_5cyyp"]
+[ext_resource type="AudioStream" uid="uid://domh5hcyuymlk" path="res://Sounds/kick.mp3" id="7_rd326"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6ekd3"]
 animations = [{
@@ -28,6 +29,9 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k665r"]
 size = Vector2(33.940887, 32.49984)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nac40"]
+size = Vector2(116, 17)
 
 [node name="enemy" unique_id=1150459999 instance=ExtResource("1_whe2r")]
 script = ExtResource("2_byod8")
@@ -61,3 +65,12 @@ scale = Vector2(1.8796296, -0.66667145)
 position = Vector2(6.970442, -6.249916)
 scale = Vector2(0.9999999, 0.9999999)
 shape = SubResource("RectangleShape2D_k665r")
+
+[node name="KickSound" type="AudioStreamPlayer2D" parent="." index="6" unique_id=2030358636]
+stream = ExtResource("7_rd326")
+
+[node name="StompDetector" type="Area2D" parent="." index="7" unique_id=2005349241]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StompDetector" index="0" unique_id=1476173701]
+position = Vector2(0, -45.5)
+shape = SubResource("RectangleShape2D_nac40")

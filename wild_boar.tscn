@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://bydo3s110kodi"]
+
+[ext_resource type="PackedScene" uid="uid://c4c52ypms5j8r" path="res://enemy.tscn" id="1_swrf4"]
+[ext_resource type="Script" uid="uid://l5gql66l7vpj" path="res://wild_boar.gd" id="2_l0wyv"]
+[ext_resource type="Texture2D" uid="uid://cwxjvgo0ugvo5" path="res://SpritesImages/wild_boar/11.png" id="3_wslef"]
+[ext_resource type="Texture2D" uid="uid://cyxdrtdnjg31k" path="res://SpritesImages/wild_boar/12.png" id="4_541ak"]
+[ext_resource type="AudioStream" uid="uid://cwqmvi4uvic7e" path="res://Sounds/wild_boar.mp3" id="5_541ak"]
+[ext_resource type="AudioStream" uid="uid://domh5hcyuymlk" path="res://Sounds/kick.mp3" id="6_7woiv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o7vc3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_wslef")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_541ak")
+}],
+"loop": 1,
+"name": &"walk_reverse",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k665r"]
+size = Vector2(109, 16)
+
+[node name="enemy" unique_id=1150459999 instance=ExtResource("1_swrf4")]
+script = ExtResource("2_l0wyv")
+
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=1107778407]
+scale = Vector2(0.085659295, 0.085470125)
+sprite_frames = SubResource("SpriteFrames_o7vc3")
+animation = &"walk"
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=2030213173]
+scale = Vector2(0.97361517, 0.709614)
+
+[node name="WildBoarSound" type="AudioStreamPlayer2D" parent="." index="3" unique_id=1018764518]
+stream = ExtResource("5_541ak")
+
+[node name="StompDetector" type="Area2D" parent="." index="4" unique_id=1679550526]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StompDetector" index="0" unique_id=1137998648]
+position = Vector2(-2.5, -39)
+shape = SubResource("RectangleShape2D_k665r")
+
+[node name="KickSound" type="AudioStreamPlayer2D" parent="." index="5" unique_id=569087360]
+stream = ExtResource("6_7woiv")
