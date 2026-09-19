@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://cnoqre1nlxevr"]
+
+[ext_resource type="PackedScene" uid="uid://c4c52ypms5j8r" path="res://Scenes/Enemy/enemy.tscn" id="1_ylp1l"]
+[ext_resource type="Script" uid="uid://b765viyqg1hge" path="res://Scenes/Cow/cow.gd" id="2_oldvf"]
+[ext_resource type="Texture2D" uid="uid://b8udygc4qekwx" path="res://SpritesImages/cow/Attack/Attack2.png" id="3_scotl"]
+[ext_resource type="Texture2D" uid="uid://cn0shb68vpuho" path="res://SpritesImages/cow/Attack/Attack4.png" id="4_6d5kt"]
+[ext_resource type="Texture2D" uid="uid://bywmqgkq605f0" path="res://SpritesImages/cow/kick/2.png" id="5_5jtkc"]
+[ext_resource type="Texture2D" uid="uid://c4wnt3q0eoccn" path="res://SpritesImages/cow/kick/1.png" id="6_8trwf"]
+[ext_resource type="Texture2D" uid="uid://dk6l7kf0gibcl" path="res://SpritesImages/cow/Idle&Walk/walk1.png" id="7_ygv22"]
+[ext_resource type="Texture2D" uid="uid://behuaio1u8sqw" path="res://SpritesImages/cow/Idle&Walk/walk2.png" id="8_620p4"]
+[ext_resource type="Texture2D" uid="uid://jvmpjrhre6xe" path="res://SpritesImages/cow/Idle&Walk/walk3.png" id="9_phk2b"]
+[ext_resource type="Texture2D" uid="uid://midv82r3ykhq" path="res://SpritesImages/cow/Idle&Walk/walk4.png" id="10_jw7xq"]
+[ext_resource type="AudioStream" uid="uid://cvpwvhjxk42e6" path="res://Sounds/muuu.mp3" id="11_c73kd"]
+[ext_resource type="Texture2D" uid="uid://bttii13pal5wr" path="res://SpritesImages/cow/Attack/Attack3.png" id="12_nk0nv"]
+[ext_resource type="AudioStream" uid="uid://domh5hcyuymlk" path="res://Sounds/kick.mp3" id="13_scxm2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7k104"]
+animations = [{
+"frames": [{
+"duration": 1.5,
+"texture": ExtResource("3_scotl")
+}],
+"loop": 1,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.5,
+"texture": ExtResource("4_6d5kt")
+}],
+"loop": 1,
+"name": &"attack_reverse",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("5_5jtkc")
+}],
+"loop": 1,
+"name": &"kick",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("6_8trwf")
+}],
+"loop": 1,
+"name": &"kick_reverse",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("7_ygv22")
+}, {
+"duration": 1.5,
+"texture": ExtResource("8_620p4")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("9_phk2b")
+}, {
+"duration": 1.5,
+"texture": ExtResource("10_jw7xq")
+}],
+"loop": 1,
+"name": &"walk_reverse",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k665r"]
+size = Vector2(114.12428, 89.28532)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nac40"]
+size = Vector2(39, 9)
+
+[node name="enemy" unique_id=1150459999 instance=ExtResource("1_ylp1l")]
+script = ExtResource("2_oldvf")
+
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=1107778407]
+position = Vector2(-4, 1)
+scale = Vector2(0.1511724, 0.15407537)
+sprite_frames = SubResource("SpriteFrames_7k104")
+animation = &"walk"
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=2030213173]
+position = Vector2(-6, -2)
+scale = Vector2(0.6365659, 0.7289064)
+
+[node name="MooSound" type="AudioStreamPlayer2D" parent="." index="2" unique_id=1857454714]
+stream = ExtResource("11_c73kd")
+
+[node name="AttackDirection" type="Node2D" parent="." index="3" unique_id=2077269759]
+
+[node name="Milk" type="Sprite2D" parent="AttackDirection" index="0" unique_id=1684703783]
+visible = false
+position = Vector2(47.185, 22)
+scale = Vector2(0.09949177, 0.040721435)
+texture = ExtResource("12_nk0nv")
+
+[node name="MilkHitbox" type="Area2D" parent="AttackDirection" index="1" unique_id=1318122328]
+position = Vector2(0, 3)
+scale = Vector2(0.99508566, 0.9269008)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackDirection/MilkHitbox" index="0" unique_id=87022881]
+position = Vector2(47.232117, 18.340689)
+scale = Vector2(1.0890584, -0.43442008)
+shape = SubResource("RectangleShape2D_k665r")
+
+[node name="StompDetector" type="Area2D" parent="." index="4" unique_id=1750260215]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StompDetector" index="0" unique_id=1970185792]
+position = Vector2(-3, -43)
+shape = SubResource("RectangleShape2D_nac40")
+
+[node name="KickSound" type="AudioStreamPlayer2D" parent="." index="5" unique_id=982461228]
+stream = ExtResource("13_scxm2")
+
+[connection signal="body_entered" from="AttackDirection/MilkHitbox" to="." method="_on_milk_hitbox_body_entered"]

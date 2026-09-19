@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://dpf7po2q04ous"]
+
+[ext_resource type="PackedScene" uid="uid://c4c52ypms5j8r" path="res://Scenes/Enemy/enemy.tscn" id="1_yctnw"]
+[ext_resource type="Script" uid="uid://bt6ooivjbe4bu" path="res://Scenes/Chicken/chicken.gd" id="2_yctnw"]
+[ext_resource type="Texture2D" uid="uid://dgcq1fkyty1bq" path="res://SpritesImages/chicken/attack/attac2.png" id="3_njjuj"]
+[ext_resource type="Texture2D" uid="uid://da5yj1i74gt2" path="res://SpritesImages/chicken/attack/attac1.png" id="4_v1aft"]
+[ext_resource type="Texture2D" uid="uid://cgkuw2m0cywmc" path="res://SpritesImages/chicken/walk/1.png" id="5_eqkmn"]
+[ext_resource type="Texture2D" uid="uid://c0trhvn4wb6ga" path="res://SpritesImages/chicken/walk/2.png" id="6_6x7g1"]
+[ext_resource type="AudioStream" uid="uid://dww3vp0dc1cp6" path="res://Sounds/chickensound.mp3" id="7_g7abr"]
+[ext_resource type="AudioStream" uid="uid://bfq3yr18t4ej5" path="res://Sounds/eggtrow.mp3" id="8_5jlif"]
+[ext_resource type="AudioStream" uid="uid://domh5hcyuymlk" path="res://Sounds/kick.mp3" id="9_wi2a3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tl7hd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_njjuj")
+}],
+"loop": 1,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_v1aft")
+}],
+"loop": 1,
+"name": &"attack_reverse",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_eqkmn")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_6x7g1")
+}],
+"loop": 1,
+"name": &"walk_reverse",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k665r"]
+size = Vector2(69, 21)
+
+[node name="enemy" unique_id=1150459999 instance=ExtResource("1_yctnw")]
+script = ExtResource("2_yctnw")
+
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=1107778407]
+scale = Vector2(0.07692311, 0.069182456)
+sprite_frames = SubResource("SpriteFrames_tl7hd")
+animation = &"walk"
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=2030213173]
+position = Vector2(-1, 1)
+scale = Vector2(0.7800717, 0.6009143)
+
+[node name="EggSpawn" type="Marker2D" parent="." index="3" unique_id=1921193875]
+position = Vector2(-14, 8)
+
+[node name="ChickenSound" type="AudioStreamPlayer" parent="." index="4" unique_id=142816655]
+stream = ExtResource("7_g7abr")
+
+[node name="EggThrow" type="AudioStreamPlayer" parent="." index="5" unique_id=427670724]
+stream = ExtResource("8_5jlif")
+
+[node name="StompDetector" type="Area2D" parent="." index="6" unique_id=1627638802]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StompDetector" index="0" unique_id=1990974200]
+position = Vector2(4, -31)
+shape = SubResource("RectangleShape2D_k665r")
+
+[node name="KickSound" type="AudioStreamPlayer" parent="." index="7" unique_id=1870319575]
+stream = ExtResource("9_wi2a3")

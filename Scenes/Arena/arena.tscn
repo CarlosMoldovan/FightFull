@@ -1,0 +1,130 @@
+[gd_scene format=3 uid="uid://bg8nf0qpgksh0"]
+
+[ext_resource type="Texture2D" uid="uid://cvvpnw6xkkhmx" path="res://SpritesImages/BackgroundArenaFinal.png" id="1_t7yvt"]
+[ext_resource type="PackedScene" uid="uid://dx65l82dvqj2v" path="res://Scenes/Player/player.tscn" id="2_11not"]
+[ext_resource type="Script" uid="uid://bjovpthx0ts3g" path="res://Scenes/Arena/level_manager.gd" id="3_t7yvt"]
+[ext_resource type="Shader" uid="uid://bera3dwhcednh" path="res://Scenes/Arena/arena.gdshader" id="4_t7yvt"]
+[ext_resource type="Script" uid="uid://bldvtie3brkt3" path="res://Scenes/Arena/game_over.gd" id="5_t7yvt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k665r"]
+size = Vector2(788.0186, 25.057915)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nac40"]
+size = Vector2(756.52966, 41.89821)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d1mjv"]
+size = Vector2(20, 1000)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n3aeq"]
+size = Vector2(20, 1000)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_27ga2"]
+shader = ExtResource("4_t7yvt")
+shader_parameter/distortion_strength = 0.0
+shader_parameter/distortion_center = Vector2(0.5, 0.5)
+
+[node name="arena" type="Node2D" unique_id=63209503]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1203642817]
+position = Vector2(5, 71)
+scale = Vector2(1.2444383, 0.9536506)
+texture = ExtResource("1_t7yvt")
+
+[node name="Walls" type="StaticBody2D" parent="." unique_id=1781715089]
+scale = Vector2(-2.508824, -1.5526372)
+
+[node name="TopWall" type="CollisionShape2D" parent="Walls" unique_id=902195279]
+position = Vector2(-6.3774896, 28.982948)
+scale = Vector2(1, 2.615671)
+shape = SubResource("RectangleShape2D_k665r")
+
+[node name="BottomWall" type="CollisionShape2D" parent="Walls" unique_id=1453747211]
+position = Vector2(-17.538097, -188.71118)
+shape = SubResource("RectangleShape2D_nac40")
+
+[node name="LeftWall" type="CollisionShape2D" parent="Walls" unique_id=1126053415]
+position = Vector2(208.4642, -37.999863)
+shape = SubResource("RectangleShape2D_d1mjv")
+
+[node name="RightWall" type="CollisionShape2D" parent="Walls" unique_id=655153355]
+position = Vector2(-215.63887, 61.830284)
+shape = SubResource("RectangleShape2D_n3aeq")
+
+[node name="BlackHoleTarget" type="Marker2D" parent="." unique_id=1593401442 groups=["black_hole"]]
+position = Vector2(-15, -13)
+
+[node name="player" parent="." unique_id=415843363 groups=["player"] instance=ExtResource("2_11not")]
+position = Vector2(179, 184)
+scale = Vector2(0.83327025, 0.7665917)
+
+[node name="LevelManager" type="Node" parent="." unique_id=865271396]
+script = ExtResource("3_t7yvt")
+
+[node name="EnemySpawn" type="Marker2D" parent="." unique_id=1115542395]
+position = Vector2(-298, 226.00002)
+scale = Vector2(2.6599026, 9.878873)
+
+[node name="DeathEffect" type="CanvasLayer" parent="." unique_id=276611809]
+
+[node name="Distortion" type="ColorRect" parent="DeathEffect" unique_id=56655438]
+material = SubResource("ShaderMaterial_27ga2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1169.0
+offset_top = -388.0
+offset_right = -1169.0
+offset_bottom = -388.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.0240197, 1.4808748)
+color = Color(1, 1, 1, 0)
+
+[node name="GameOverUI" type="CanvasLayer" parent="." unique_id=1114193250]
+process_mode = 3
+visible = false
+script = ExtResource("5_t7yvt")
+
+[node name="Control" type="Control" parent="GameOverUI" unique_id=1105088168]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="GameOverUI/Control" unique_id=873928086]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 0.7058824)
+
+[node name="CenterContainer" type="CenterContainer" parent="GameOverUI/Control" unique_id=248804766]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="GameOverUI/Control/CenterContainer" unique_id=57733541]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverUI/Control/CenterContainer/Panel" unique_id=740467507]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="GameOverUI/Control/CenterContainer/Panel/VBoxContainer" unique_id=592050430]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "YOU LOST!"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="GameOverUI/Control/CenterContainer/Panel/VBoxContainer" unique_id=392163688]
+custom_minimum_size = Vector2(220, 55)
+layout_mode = 2
+text = "PLAY AGAIN!"
+
+[node name="Button2" type="Button" parent="GameOverUI/Control/CenterContainer/Panel/VBoxContainer" unique_id=1325047685]
+custom_minimum_size = Vector2(220, 55)
+layout_mode = 2
+text = "MENU"
