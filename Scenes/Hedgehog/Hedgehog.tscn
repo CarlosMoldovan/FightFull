@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://yqjowcx4d7eu"]
+
+[ext_resource type="PackedScene" uid="uid://c4c52ypms5j8r" path="res://Scenes/Enemy/enemy.tscn" id="1_ypxi0"]
+[ext_resource type="Script" uid="uid://d24a0kgfjjus8" path="res://Scenes/Hedgehog/hedgehog.gd" id="2_7rl24"]
+[ext_resource type="Texture2D" uid="uid://cujgu1v5ij663" path="res://SpritesImages/Hedgehog/3.png" id="3_ylx2e"]
+[ext_resource type="Texture2D" uid="uid://qr03gq61s25y" path="res://SpritesImages/Hedgehog/1.png" id="4_nb3l0"]
+[ext_resource type="Texture2D" uid="uid://it47odr6188b" path="res://SpritesImages/Hedgehog/2.png" id="5_c43m5"]
+[ext_resource type="AudioStream" uid="uid://b8nn7g0kkeqry" path="res://Sounds/hed.mp3" id="6_nb3l0"]
+[ext_resource type="AudioStream" uid="uid://domh5hcyuymlk" path="res://Sounds/kick.mp3" id="7_c43m5"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_66l2v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ylx2e")
+}],
+"loop": 1,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_nb3l0")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_c43m5")
+}],
+"loop": 1,
+"name": &"walk_reverse",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k665r"]
+size = Vector2(115, 20)
+
+[node name="enemy" unique_id=1150459999 instance=ExtResource("1_ypxi0")]
+script = ExtResource("2_7rl24")
+
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=1107778407]
+scale = Vector2(0.061426613, 0.06748115)
+sprite_frames = SubResource("SpriteFrames_66l2v")
+animation = &"walk"
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=2030213173]
+scale = Vector2(0.700855, 0.56043994)
+
+[node name="StompDetector" type="Area2D" parent="." index="3" unique_id=662589231]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StompDetector" index="0" unique_id=1573826933]
+position = Vector2(5, -28)
+shape = SubResource("RectangleShape2D_k665r")
+
+[node name="HedgehogSound" type="AudioStreamPlayer2D" parent="." index="4" unique_id=130416761]
+stream = ExtResource("6_nb3l0")
+
+[node name="KickSound" type="AudioStreamPlayer2D" parent="." index="5" unique_id=578199281]
+stream = ExtResource("7_c43m5")

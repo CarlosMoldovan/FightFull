@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c4c52ypms5j8r" path="res://Scenes/Enemy/enemy.tscn" id="1_66l2v"]
 [ext_resource type="Script" uid="uid://v20jfex4f6km" path="res://Scenes/Frog/frog.gd" id="2_nt8e0"]
-[ext_resource type="Texture2D" uid="uid://qr03gq61s25y" path="res://SpritesImages/frog/1.png" id="3_j6ggx"]
+[ext_resource type="Texture2D" uid="uid://qr03gq61s25y" path="res://SpritesImages/Hedgehog/1.png" id="3_j6ggx"]
 [ext_resource type="Texture2D" uid="uid://bsqi2iaqjvptt" path="res://SpritesImages/frog/2.png" id="4_wx1sc"]
 [ext_resource type="AudioStream" uid="uid://dpa77umcjr5e2" path="res://Sounds/frog.mp3" id="5_ja4cl"]
 [ext_resource type="Texture2D" uid="uid://dryeqekyi3g6t" path="res://SpritesImages/frog/tongue.png" id="6_gi047"]

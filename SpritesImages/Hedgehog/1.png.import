@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://70bxjt7lb6ij"
-path="res://.godot/imported/1.png-cedf9def8eb0840e7afa23f1a5d28d1a.ctex"
+uid="uid://qr03gq61s25y"
+path="res://.godot/imported/1.png-b3912019580c91f97260b4019b9ad8bc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://SpritesImages/frog/1.png"
-dest_files=["res://.godot/imported/1.png-cedf9def8eb0840e7afa23f1a5d28d1a.ctex"]
+source_file="res://SpritesImages/Hedgehog/1.png"
+dest_files=["res://.godot/imported/1.png-b3912019580c91f97260b4019b9ad8bc.ctex"]
 
 [params]
 

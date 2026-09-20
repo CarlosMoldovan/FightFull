@@ -4,13 +4,14 @@ var current_level = 1
 var level_finished = false
 
 var levels = {
-	1: ["Snake"],
-	2: ["Monkey"],
-	3: ["Frog"],
-	4: ["Wboar"],
-	5: ["Raw"],
-	6: ["Chicken"],
-	7: ["Cow"]
+	1: ["Hedgehog"],
+	2: ["Snake"],
+	3: ["Monkey"],
+	4: ["Frog"],
+	5: ["Wboar"],
+	6: ["Raw"],
+	7: ["Chicken"],
+	8: ["Cow"]
 }
 
 const COW_SCENE = preload("res://Scenes/Cow/cow.tscn")
@@ -20,6 +21,7 @@ const FROG_SCENE = preload("res://Scenes/Frog/frog.tscn")
 const WBOAR_SCENE = preload("res://Scenes/WildBoar/wild_boar.tscn")
 const MONKEY_SCENE = preload("res://Scenes/Monkey/monkey.tscn")
 const SNAKE_SCENE = preload("res://Scenes/Snake/snake.tscn")
+const HG_SCENE = preload("res://Scenes/Hedgehog/hedgehog.tscn")
 
 
 func _ready():
@@ -97,6 +99,12 @@ func spawn_enemy(enemy_name: String):
 		var spawn = get_parent().get_node("EnemySpawn")
 		snake.global_position = spawn.global_position
 		get_parent().call_deferred("add_child", snake)
+		
+	elif enemy_name == "Hedgehog":
+		var hg = HG_SCENE.instantiate()
+		var spawn = get_parent().get_node("EnemySpawn")
+		hg.global_position = spawn.global_position
+		get_parent().call_deferred("add_child", hg)
 		
 		
 
