@@ -27,7 +27,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k665r"]
-size = Vector2(118, 120)
+size = Vector2(57, 115)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2hs0m"]
 size = Vector2(5.2138653, 16.043125)
@@ -42,7 +42,7 @@ sprite_frames = SubResource("SpriteFrames_k665r")
 animation = &"walk_reverse"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=812660798]
-position = Vector2(-1, 0)
+position = Vector2(-12.5, -2.5)
 shape = SubResource("RectangleShape2D_k665r")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=189524674 groups=["player"]]

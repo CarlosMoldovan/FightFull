@@ -29,6 +29,8 @@ const BANANA_PREP_TIME = 1.0
 var jump_direction = 1
 
 
+
+
 func _ready():
 	super._ready()
 
