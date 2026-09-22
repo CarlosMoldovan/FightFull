@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://dvt4e1eyg18f1"]
+
+[ext_resource type="PackedScene" uid="uid://c4c52ypms5j8r" path="res://Scenes/Enemy/enemy.tscn" id="1_wkja5"]
+[ext_resource type="Script" uid="uid://d260eob5hayu5" path="res://Scenes/Horse/horse.gd" id="2_0q1fo"]
+[ext_resource type="Texture2D" uid="uid://bflyrtoxj6trx" path="res://SpritesImages/Horse/3.png" id="3_a25uw"]
+[ext_resource type="Texture2D" uid="uid://rcxpyo1347kf" path="res://SpritesImages/Horse/1.png" id="3_gyr8x"]
+[ext_resource type="Texture2D" uid="uid://bejmqasbay6ps" path="res://SpritesImages/Horse/4.png" id="4_dbm0a"]
+[ext_resource type="Texture2D" uid="uid://cx5f5tll1c3vx" path="res://SpritesImages/Horse/2.png" id="4_qinfh"]
+[ext_resource type="AudioStream" uid="uid://domh5hcyuymlk" path="res://Sounds/kick.mp3" id="5_gyr8x"]
+[ext_resource type="AudioStream" uid="uid://d2vshfe48fxcp" path="res://Sounds/horse.mp3" id="8_dbm0a"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k665r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_a25uw")
+}],
+"loop": 1,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_dbm0a")
+}],
+"loop": 1,
+"name": &"attack_reverse",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_gyr8x")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_qinfh")
+}],
+"loop": 1,
+"name": &"walk_reverse",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k665r"]
+size = Vector2(157, 20)
+
+[node name="enemy" unique_id=1150459999 instance=ExtResource("1_wkja5")]
+script = ExtResource("2_0q1fo")
+
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=1107778407]
+scale = Vector2(0.1116898, 0.11423841)
+sprite_frames = SubResource("SpriteFrames_k665r")
+animation = &"attack_reverse"
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=2030213173]
+scale = Vector2(1.4439253, 1.0308642)
+
+[node name="StompDetector" type="Area2D" parent="." index="3" unique_id=991409309]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StompDetector" index="0" unique_id=2138827057]
+position = Vector2(2, -61)
+shape = SubResource("RectangleShape2D_k665r")
+
+[node name="KickSound" type="AudioStreamPlayer2D" parent="." index="4" unique_id=1688480122]
+stream = ExtResource("5_gyr8x")
+
+[node name="HorseSound" type="AudioStreamPlayer2D" parent="." index="5" unique_id=853980934]
+stream = ExtResource("8_dbm0a")
