@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://ba0u7oco8a47t"]
+
+[ext_resource type="PackedScene" uid="uid://c4c52ypms5j8r" path="res://Scenes/Enemy/enemy.tscn" id="1_gyjdu"]
+[ext_resource type="Script" uid="uid://3e8bmfqpp4ni" path="res://Scenes/Eagle/eagle.gd" id="2_iwmy3"]
+[ext_resource type="Texture2D" uid="uid://cpd3xww38040q" path="res://SpritesImages/Eagle/1.png" id="2_rpk6k"]
+[ext_resource type="Texture2D" uid="uid://dyasx5kif7kai" path="res://SpritesImages/Eagle/4.png" id="3_eabyx"]
+[ext_resource type="Texture2D" uid="uid://kuu33k5e8nfd" path="res://SpritesImages/Eagle/3.png" id="3_fkmn1"]
+[ext_resource type="Texture2D" uid="uid://c886r4kvml4ng" path="res://SpritesImages/Eagle/2.png" id="5_iwmy3"]
+[ext_resource type="AudioStream" uid="uid://btyhvnltvtmfx" path="res://Sounds/eagle.mp3" id="7_v0nbi"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_70etl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_fkmn1")
+}],
+"loop": 1,
+"name": &"fly",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_eabyx")
+}],
+"loop": 1,
+"name": &"fly_reverse",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rpk6k")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_iwmy3")
+}],
+"loop": 1,
+"name": &"walk_reverse",
+"speed": 5.0
+}]
+
+[node name="enemy" unique_id=1150459999 instance=ExtResource("1_gyjdu")]
+script = ExtResource("2_iwmy3")
+
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=1107778407]
+scale = Vector2(0.087149814, 0.05839031)
+sprite_frames = SubResource("SpriteFrames_70etl")
+animation = &"fly_reverse"
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=2030213173]
+scale = Vector2(0.9256867, 0.50808823)
+
+[node name="EagleSound" type="AudioStreamPlayer2D" parent="." index="3" unique_id=1351632446]
+stream = ExtResource("7_v0nbi")
