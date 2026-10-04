@@ -32,4 +32,14 @@ offset_bottom = 149.0
 scale = Vector2(1.36, 1.2237091)
 text = "PLAY"
 
+[node name="Button2" type="Button" parent="." unique_id=1341874110]
+layout_mode = 0
+offset_left = 540.00006
+offset_top = 177.0
+offset_right = 589.00006
+offset_bottom = 208.0
+scale = Vector2(1.2884611, 1.3521119)
+text = "Story"
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

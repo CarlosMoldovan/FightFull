@@ -1,0 +1,135 @@
+[gd_scene format=3 uid="uid://b85ww75y48wpe"]
+
+[ext_resource type="Script" uid="uid://7hpbupmolw7w" path="res://Scenes/StoryArena/story_arena.gd" id="1_rr0m2"]
+[ext_resource type="Texture2D" uid="uid://bqolhvaj2af5b" path="res://SpritesImages/3D/7777.png" id="2_ejfgt"]
+[ext_resource type="Texture2D" uid="uid://cbhsbqtmnc434" path="res://SpritesImages/3D/blackhole1.png" id="2_kg4yh"]
+[ext_resource type="Shader" uid="uid://4hw61n54cpo" path="res://Scenes/StoryArena/story_arena.gdshader" id="2_poump"]
+[ext_resource type="Texture2D" uid="uid://dkl31c8j26tm6" path="res://SpritesImages/backg100.png" id="5_ejfgt"]
+[ext_resource type="Texture2D" uid="uid://d324m4e1mo8e2" path="res://SpritesImages/3D/arenastory2.png" id="6_1wh6v"]
+[ext_resource type="PackedScene" uid="uid://bpd078pp0eqkm" path="res://Scenes/Rocket/rocket.tscn" id="7_j7e52"]
+[ext_resource type="PackedScene" uid="uid://c0osb83roxpb" path="res://Scenes/Chest/chest.tscn" id="8_je2j5"]
+[ext_resource type="PackedScene" uid="uid://dx65l82dvqj2v" path="res://Scenes/Player/player.tscn" id="9_yk0yi"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_0gtpw"]
+panorama = ExtResource("2_ejfgt")
+
+[sub_resource type="Sky" id="Sky_wfofm"]
+sky_material = SubResource("PanoramaSkyMaterial_0gtpw")
+
+[sub_resource type="Environment" id="Environment_nac40"]
+background_mode = 2
+background_color = Color(0.007843138, 0.011764706, 0.039215688, 1)
+sky = SubResource("Sky_wfofm")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k771h"]
+render_priority = 0
+shader = ExtResource("2_poump")
+shader_parameter/black_hole_texture = ExtResource("2_kg4yh")
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_k665r"]
+a = Vector2(3, -9)
+b = Vector2(119, 62)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k665r"]
+size = Vector2(869, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nac40"]
+size = Vector2(196, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d1mjv"]
+size = Vector2(20, 247)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n3aeq"]
+size = Vector2(26, 337)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fu5up"]
+size = Vector2(1050.5, 20)
+
+[node name="StoryArena" type="Node2D" unique_id=772101298]
+script = ExtResource("1_rr0m2")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=948658623]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1311039999]
+handle_input_locally = false
+size = Vector2i(2, 2)
+render_target_update_mode = 4
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport" unique_id=1851725483]
+environment = SubResource("Environment_nac40")
+
+[node name="World3D" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=1541805149]
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/World3D" unique_id=1338049295]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 5)
+current = true
+fov = 110.758
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/World3D" unique_id=151175457]
+
+[node name="BlackHole3D" type="Sprite3D" parent="SubViewportContainer/SubViewport/World3D" unique_id=1736825595]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, -50)
+material_override = SubResource("ShaderMaterial_k771h")
+texture = ExtResource("2_kg4yh")
+
+[node name="SpaceBackground" type="Sprite3D" parent="SubViewportContainer/SubViewport/World3D" unique_id=810186146]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100)
+pixel_size = 0.4
+texture = ExtResource("5_ejfgt")
+
+[node name="Gameplay" type="Node2D" parent="." unique_id=635503128]
+position = Vector2(-8, 0)
+
+[node name="Arena" type="Node2D" parent="Gameplay" unique_id=770084094]
+
+[node name="ArenaBackground" type="Sprite2D" parent="Gameplay/Arena" unique_id=669385518]
+position = Vector2(578.49994, 485)
+scale = Vector2(0.5854766, 0.4590164)
+texture = ExtResource("6_1wh6v")
+
+[node name="Rocket" parent="Gameplay/Arena" unique_id=483547205 instance=ExtResource("7_j7e52")]
+position = Vector2(149, 459)
+
+[node name="Chest" parent="Gameplay/Arena" unique_id=1849363181 instance=ExtResource("8_je2j5")]
+position = Vector2(1042, 555)
+
+[node name="Walls" type="StaticBody2D" parent="Gameplay/Arena" unique_id=1256210663]
+
+[node name="Bottom1" type="CollisionShape2D" parent="Gameplay/Arena/Walls" unique_id=80009201]
+position = Vector2(145, 523)
+shape = SubResource("SegmentShape2D_k665r")
+
+[node name="Bottom2" type="CollisionShape2D" parent="Gameplay/Arena/Walls" unique_id=811984805]
+position = Vector2(683.5, 590)
+shape = SubResource("RectangleShape2D_k665r")
+
+[node name="Bottom3" type="CollisionShape2D" parent="Gameplay/Arena/Walls" unique_id=1188156111]
+position = Vector2(57, 520)
+shape = SubResource("RectangleShape2D_nac40")
+
+[node name="Left" type="CollisionShape2D" parent="Gameplay/Arena/Walls" unique_id=1960657655]
+position = Vector2(95, 425)
+shape = SubResource("RectangleShape2D_d1mjv")
+
+[node name="Right" type="CollisionShape2D" parent="Gameplay/Arena/Walls" unique_id=234530654]
+position = Vector2(1123, 430.5)
+shape = SubResource("RectangleShape2D_n3aeq")
+
+[node name="Top" type="CollisionShape2D" parent="Gameplay/Arena/Walls" unique_id=1193020599]
+position = Vector2(602.75, 328)
+shape = SubResource("RectangleShape2D_fu5up")
+
+[node name="player" parent="Gameplay/Arena" unique_id=415843363 groups=["player"] instance=ExtResource("9_yk0yi")]
+position = Vector2(804, 555)
+scale = Vector2(0.5787969, 0.5118639)
+
+[node name="Camera2D" parent="Gameplay/Arena/player" index="2" unique_id=189524674]
+enabled = false
+
+[editable path="Gameplay/Arena/player"]

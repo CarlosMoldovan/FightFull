@@ -46,6 +46,7 @@ position = Vector2(-12.5, -2.5)
 shape = SubResource("RectangleShape2D_k665r")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=189524674 groups=["player"]]
+scale = Vector2(0.6961455, 0.7129313)
 zoom = Vector2(1.1, 1.1)
 
 [node name="BlackHoleSound" type="AudioStreamPlayer" parent="." unique_id=1983574176]

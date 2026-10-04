@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://c0osb83roxpb"]
+
+[ext_resource type="Script" uid="uid://ffjm1bdp0oy" path="res://Scenes/Chest/chest.gd" id="1_btqhl"]
+[ext_resource type="Texture2D" uid="uid://k31xpnr0oeh7" path="res://SpritesImages/3D/chest1.png" id="1_eu8gf"]
+[ext_resource type="Texture2D" uid="uid://ruqksusu38sh" path="res://SpritesImages/3D/chest2.png" id="2_btqhl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k665r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_eu8gf")
+}],
+"loop": 1,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_btqhl")
+}],
+"loop": 1,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rbhtv"]
+size = Vector2(70, 57)
+
+[node name="Chest" type="Area2D" unique_id=1849363181]
+script = ExtResource("1_btqhl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1915005577]
+scale = Vector2(0.066508316, 0.052631557)
+sprite_frames = SubResource("SpriteFrames_k665r")
+animation = &"closed"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=923881173]
+position = Vector2(3, -2.5)
+shape = SubResource("RectangleShape2D_rbhtv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
